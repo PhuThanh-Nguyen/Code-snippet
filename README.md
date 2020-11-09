@@ -1,1 +1,1 @@
-# code-snippet
+# Collection of code snippets
