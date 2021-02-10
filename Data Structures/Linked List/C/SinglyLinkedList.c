@@ -197,3 +197,41 @@ void deleteMid(int indexAfter, LinkedList* L)
 			free(temp);
 		}
 }
+
+// File operations
+LinkedList* readFromFile(const char* fileName)
+{
+	FILE *fp = fopen(fileName, "r");
+	if(fp != NULL)
+	{
+		char buffer[255];
+		LinkedList* newList = createNewLinkedList();
+		if(newList != NULL)
+		{
+			while(fgets(buffer, 255, fp))
+    			insertTail(atoi(buffer), newList);
+    		return newList;
+    	}
+	}
+	fclose(fp);
+	return NULL;
+}
+void writeToFile(LinkedList L, const char* fileName)
+{
+	FILE *fp = fopen(fileName, "w");
+	if(fp != NULL)
+	{
+		if(!isEmpty(L))
+		{
+			Node* currentNode = L.headNode;
+			while(currentNode)
+			{
+				char line[255];
+				sprintf(line, "%d\n", currentNode->data);
+				fprintf(fp, line);
+				currentNode = currentNode->nextNode;
+			}
+		}
+	}
+	fclose(fp);
+}

@@ -33,3 +33,7 @@ int insertMid(int, int, LinkedList*); // Insert after index
 void deleteHead(LinkedList*);
 void deleteTail(LinkedList*);
 void deleteMid(int, LinkedList*); // Delete after index
+
+// File operations
+LinkedList* readFromFile(const char*);
+void writeToFile(LinkedList, const char*);
