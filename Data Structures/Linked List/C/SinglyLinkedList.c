@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "linkedlist.h"
+#include "SinglyLinkedList.h"
 
 // Contructor
 Node* createNewNode(int data)
