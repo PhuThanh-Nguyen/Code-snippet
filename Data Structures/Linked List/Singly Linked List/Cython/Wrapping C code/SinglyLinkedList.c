@@ -148,24 +148,29 @@ int insertMid(int newData, int indexAfter, LinkedList* L)
 }
 
 // Deletion
-void deleteHead(LinkedList* L)
+int deleteHead(LinkedList* L)
 {
 	if(!isEmpty(*L))
 	{
 		Node* temp = L->headNode;
+		int returnVal = temp->data;
 		L->headNode = temp->nextNode;
 		free(temp);
+		return returnVal;
 	}
+	return INT_MAX;
 }
 
-void deleteTail(LinkedList* L)
+int deleteTail(LinkedList* L)
 {
 	if(!isEmpty(*L))
 	{
 		Node* currentNode = L->headNode;
+		int returnVal;
 		if(currentNode->nextNode == NULL)
 		{
 			L->headNode = NULL;
+			returnVal = currentNode->data;
 			free(currentNode);
 		}
 		else
@@ -173,16 +178,20 @@ void deleteTail(LinkedList* L)
 			while(currentNode->nextNode->nextNode)
 				currentNode = currentNode->nextNode;
 			Node* temp = currentNode->nextNode;
+			returnVal = currentNode->data;
 			currentNode->nextNode = NULL;
 			free(temp);
 		}
+		return returnVal;
 	}
+	return INT_MAX;
 }
 
-void deleteMid(int indexAfter, LinkedList* L)
+int deleteMid(int indexAfter, LinkedList* L)
 {
 	int i = 0;
 	Node* currentNode = L->headNode;
+	int returnVal;
 
 	while((currentNode != NULL) && (i != indexAfter))
 	{
@@ -193,9 +202,13 @@ void deleteMid(int indexAfter, LinkedList* L)
 		if(currentNode->nextNode != NULL)
 		{
 			Node* temp = currentNode->nextNode;
+			returnVal = temp->data;
 			currentNode->nextNode = temp->nextNode;
 			free(temp);
+			
+			return returnVal;
 		}
+	return INT_MAX;
 }
 
 // File operations

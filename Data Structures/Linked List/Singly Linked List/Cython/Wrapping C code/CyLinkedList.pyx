@@ -21,9 +21,9 @@ cdef extern from "SinglyLinkedList.h":
 	int insertTail(int, LinkedList*)
 	int insertMid(int, int, LinkedList*)
 
-	void deleteHead(LinkedList*)
-	void deleteTail(LinkedList*)
-	void deleteMid(int, LinkedList*)
+	int deleteHead(LinkedList*)
+	int deleteTail(LinkedList*)
+	int deleteMid(int, LinkedList*)
 
 	LinkedList* readFromFile(const char*)
 	void writeToFile(LinkedList, const char*)
@@ -43,23 +43,40 @@ cdef char* fromStringToChar(str s):
 cdef class LList:
 	cdef:
 		LinkedList* llist
-		char* temp
 	
-	def __cinit__(self, str fileName = ''):
+	def __cinit__(self, list init_list = []):
 		
-		if fileName != '':
-			temp = fromStringToChar(fileName)
-			self.llist = readFromFile(temp)
-			free(temp)
-		else:
-			self.llist = createNewLinkedList()
+		self.llist = createNewLinkedList()
 		
 		if self.llist == NULL:
 			raise MemoryError('Cannot initiallize linked list')
+		
+		for val in init_list:
+			self.insert(val)
+	
+	@classmethod
+	def fromFile(self, str fileName = ''):
+		cdef char* temp
+		returnLList = LList()
+		if fileName != '':
+			temp = fromStringToChar(fileName)
+			
+			if returnLList.llist != NULL:
+				free(returnLList.llist)
+				
+			returnLList.llist = readFromFile(temp)
+			free(temp)
+			
+			return returnLList
+		
+		raise ValueError(f"{fileName} doesn't exist")
 	
 	def __dealloc__(self):
 		if self.llist != NULL:
 			freeLinkedList(self.llist)
+	
+	def isEmpty(self):
+		return isEmpty(self.llist[0])
 	
 	def toFile(self, str fileName):
 		temp = fromStringToChar(fileName)
@@ -80,9 +97,19 @@ cdef class LList:
 		
 		if res == 0:
 			raise MemoryError('Insufficent Memory')
+	
+	cdef int pop_c(self, int index):
+		cdef int returnVal
+		if index == -1:
+			returnVal = deleteTail(self.llist)
+		elif index == 0:
+			returnVal = deleteHead(self.llist)
+		else:
+			returnVal = deleteMid(index - 1, self.llist)
+		return returnVal
 		
 	def insert(self, int data, int index = -1):
 		self.insert_c(data, index)
 	
-	def pop(self):
-		deleteTail(self.llist)
+	def pop(self, index = -1):
+		return self.pop_c(index)

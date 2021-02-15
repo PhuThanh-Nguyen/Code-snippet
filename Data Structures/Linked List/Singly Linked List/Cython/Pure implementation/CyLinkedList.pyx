@@ -199,7 +199,6 @@ cdef char* fromStringToChar(str s):
 cdef class LList:
 	cdef:
 		LinkedList* llist
-		char* temp
 	
 	def __cinit__(self, list init_list = []):
 		

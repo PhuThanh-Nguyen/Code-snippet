@@ -30,9 +30,9 @@ int insertTail(int, LinkedList*);
 int insertMid(int, int, LinkedList*); // Insert after index
 
 // Deletion
-void deleteHead(LinkedList*);
-void deleteTail(LinkedList*);
-void deleteMid(int, LinkedList*); // Delete after index
+int deleteHead(LinkedList*);
+int deleteTail(LinkedList*);
+int deleteMid(int, LinkedList*); // Delete after index
 
 // File operations
 LinkedList* readFromFile(const char*);
