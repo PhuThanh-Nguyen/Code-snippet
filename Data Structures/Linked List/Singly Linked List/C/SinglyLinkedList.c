@@ -139,7 +139,7 @@ int insertMid(int newData, int indexAfter, LinkedList* L)
 				return 1;
 			}
 			
-			free(currentNode);
+			free(newNode);
 			return 0;
 		}
 	}
