@@ -96,7 +96,7 @@ cdef int insertMid(int newData, int indexAfter, LinkedList* L):
 				currentNode.nextNode = newNode
 				return 1
 			
-			free(currentNode)
+			free(newNode)
 			return 0
 	return 0
 
