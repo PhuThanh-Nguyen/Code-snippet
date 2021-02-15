@@ -178,7 +178,7 @@ int deleteTail(LinkedList* L)
 			while(currentNode->nextNode->nextNode)
 				currentNode = currentNode->nextNode;
 			Node* temp = currentNode->nextNode;
-			returnVal = currentNode->data;
+			returnVal = temp->data;
 			currentNode->nextNode = NULL;
 			free(temp);
 		}
