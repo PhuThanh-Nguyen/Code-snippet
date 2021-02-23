@@ -29,11 +29,11 @@ def bisectionMethod(f, start, end, tol = 1e-3, max_iter = None, verbose = False)
 	else:
 		tol = (end - start)/(2**max_iter)
 	FA = f(start)
-	for i in range(max_iter):
+	for i in range(max_iter + 1):
 		p = start + (end - start)/2
 		FP = f(p)
 		if verbose:
-			print(f'a_{i + 1} = {start} \t b_{i + 1} = {end} \t p_{i + 1} = {p}')
+			print(f'a_{i} = {start} \t b_{i} = {end} \t p_{i} = {p}')
 		if abs(FP) < tol or (end - start) < tol:
 			return p
 		if (FA * FP) > 0:
