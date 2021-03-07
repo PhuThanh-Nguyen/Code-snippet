@@ -48,10 +48,10 @@ cdef void printLinkedList(LinkedList L):
 	printf('\n')
 
 cdef int insertHead(int newData, LinkedList* L):
-	cdef Node* newNode = createNewNode(newData);
+	cdef Node* newNode = createNewNode(newData)
 	if newNode is not NULL:
-		if isEmpty(L[0]) is True:
-			L.headNode = newNode;
+		if isEmpty(L[0]):
+			L.headNode = newNode
 		else:
 			newNode.nextNode = L.headNode
 			L.headNode = newNode
@@ -64,7 +64,7 @@ cdef int insertTail(int newData, LinkedList* L):
 		Node* currentNode
 	
 	if newNode is not NULL:
-		if isEmpty(L[0]) is True:
+		if isEmpty(L[0]):
 			L.headNode = newNode
 		else:
 			currentNode = L.headNode
@@ -82,7 +82,7 @@ cdef int insertMid(int newData, int indexAfter, LinkedList* L):
 		Node* temp
 		
 	if newNode is not NULL:
-		if isEmpty(L[0]) is True:
+		if isEmpty(L[0]):
 			L.headNode = newNode;
 			return 1
 		else:
@@ -105,7 +105,7 @@ cdef int deleteHead(LinkedList* L):
 		Node* temp
 		int returnVal
 	
-	if isEmpty(L[0]) is False:
+	if isEmpty(L[0]):
 		temp = L.headNode
 		returnVal = temp.data
 		L.headNode = temp.nextNode
@@ -121,7 +121,7 @@ cdef int deleteTail(LinkedList* L):
 		Node* temp
 		int returnVal
 	
-	if isEmpty(L[0]) is False:
+	if isEmpty(L[0]):
 		currentNode = L.headNode
 		if currentNode.nextNode is NULL:
 			returnVal = currentNode.data
@@ -177,7 +177,7 @@ cdef void writeToFile(LinkedList L, const char* fileName):
 		Node* currentNode
 		char line[255]
 	if fp is not NULL:
-		if isEmpty(L) is False:
+		if isEmpty(L):
 			currentNode = L.headNode	
 			while currentNode:
 				sprintf(line, "%d\n", currentNode.data)
@@ -232,7 +232,7 @@ cdef class LList:
 			freeLinkedList(self.llist)
 	
 	def isEmpty(self):
-		return isEmpty(self.llist[0])
+		return bool(isEmpty(self.llist[0]))
 	
 	def toFile(self, str fileName):
 		temp = fromStringToChar(fileName)
