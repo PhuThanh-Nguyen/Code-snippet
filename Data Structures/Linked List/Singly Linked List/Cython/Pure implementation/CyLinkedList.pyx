@@ -83,7 +83,7 @@ cdef int insertMid(int newData, int indexAfter, LinkedList* L):
 		
 	if newNode is not NULL:
 		if isEmpty(L[0]):
-			L.headNode = newNode;
+			L.headNode = newNode
 			return 1
 		else:
 			while (currentNode is not NULL) and (i != indexAfter):
@@ -105,7 +105,7 @@ cdef int deleteHead(LinkedList* L):
 		Node* temp
 		int returnVal
 	
-	if isEmpty(L[0]):
+	if isEmpty(L[0]) == 0:
 		temp = L.headNode
 		returnVal = temp.data
 		L.headNode = temp.nextNode
@@ -121,7 +121,7 @@ cdef int deleteTail(LinkedList* L):
 		Node* temp
 		int returnVal
 	
-	if isEmpty(L[0]):
+	if isEmpty(L[0]) == 0:
 		currentNode = L.headNode
 		if currentNode.nextNode is NULL:
 			returnVal = currentNode.data
@@ -177,7 +177,7 @@ cdef void writeToFile(LinkedList L, const char* fileName):
 		Node* currentNode
 		char line[255]
 	if fp is not NULL:
-		if isEmpty(L):
+		if isEmpty(L) == 0:
 			currentNode = L.headNode	
 			while currentNode:
 				sprintf(line, "%d\n", currentNode.data)
